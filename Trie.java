@@ -1,4 +1,6 @@
-package de.tobiassassin.ADS.Uebungsblatt10.abgabe2; //gitignore -> nur für EclipseHast 
+//package de.tobiassassin.ADS.Uebungsblatt10.abgabe2; //gitignore -> nur für EclipseHast 
+
+//package de.hsrm.ads; //für subato
 
 import java.io.File;
 import java.io.FileReader;
@@ -143,7 +145,8 @@ public class Trie {
 			current = current.get(prefix.charAt(i));
 			result.append(current.value);
 		}
-		// TODO : testTrie2 -> java.lang.NullPointerException at de.hsrm.ads.Trie.predict(Trie.java:148)
+		// TODO : testTrie2 -> java.lang.NullPointerException at de.hsrm.ads.Trie.predict(Trie.java:150)
+		//vllt noch n null check, gucke es mir morgen noch mal genauer an, bekomme es grad nicht zum laufen
 		while (current.maxChild.value != '*') {
 			current = current.maxChild;
 			result.append(current.value);
@@ -172,10 +175,11 @@ public class Trie {
 			}
 			buffer.append((char) i);
 		}
+		fr.close();
 	}
 
 	public static void main(String[] args) throws IOException {
-		/*
+		
 		Trie t = new Trie();
 		t.eval();
 		System.out.println("trump : " + t.predict("trump"));
@@ -194,7 +198,7 @@ public class Trie {
 		tn0.add('u', 10);
 		tn0.add('k', 20);
 		tn0.add('o', 10);
-		tn0.add('v', 30);
+		tn0.add('v', 30);/*
 		Trie t = new Trie();
 		t.add("abc", 1);
 		t.add("abd", 1);
@@ -205,5 +209,4 @@ public class Trie {
 		System.out.println(result);
 		*/
 	}
-
 }
