@@ -1,4 +1,4 @@
-//package de.tobiassassin.ADS.Uebungsblatt10.abgabe2; //gitignore -> nur für EclipseHast 
+//package de.tobiassassin.ADS.Uebungsblatt10.abgabe2; //gitignore -> nur für Eclipse
 
 //package de.hsrm.ads; //für subato
 
@@ -145,20 +145,17 @@ public class Trie {
 			current = current.get(prefix.charAt(i));
 			result.append(current.value);
 		}
-		// TODO : testTrie2 -> java.lang.NullPointerException at de.hsrm.ads.Trie.predict(Trie.java:150)
-		//vllt noch n null check, gucke es mir morgen noch mal genauer an, bekomme es grad nicht zum laufen
-		while (current.maxChild.value != '*') {
+		while (current.maxChild != null && current.maxChild.value != '*') {
 			current = current.maxChild;
 			result.append(current.value);
-			if (current.maxChild == null)
-				break;
 		}
 		return result.toString();
 	}
 
 	public void eval() throws IOException {
 		FileReader fr = new FileReader(
-				new File("").getAbsolutePath() + "/src/main/java/blatt_10/aufgabe1/keyphrases.txt");
+			//	new File("").getAbsolutePath() + "/src/main/java/blatt_10/aufgabe1/keyphrases.txt");
+							new File("").getAbsolutePath() + "/keyphrases.txt");
 		int i;
 		StringBuilder buffer = new StringBuilder();
 		String string = "";
@@ -194,19 +191,19 @@ public class Trie {
 		System.out.println("soc : " + t.predict("soc"));
 		TrieNode tn1 = new TrieNode();
 		TrieNode tn0 = new TrieNode('*');
-		tn0.add('b', 10);
+		
+		/*tn0.add('b', 10);
 		tn0.add('u', 10);
 		tn0.add('k', 20);
 		tn0.add('o', 10);
-		tn0.add('v', 30);/*
-		Trie t = new Trie();
-		t.add("abc", 1);
-		t.add("abd", 1);
-		t.add("aba", 5);
-		t.add("abf", 10);
-		t.add("abaf", 20);
-		String result = t.predict("ab");
-		System.out.println(result);
-		*/
+		tn0.add('v', 30);*/
+		Trie t2 = new Trie();
+		t2.add("abc", 1);
+		t2.add("abd", 1);
+		t2.add("aba", 5);
+		t2.add("", 10);
+		t2.add("abaf", 20);
+		String result = t2.predict("abafd");
+		System.out.println(result);	
 	}
 }
