@@ -64,7 +64,7 @@ public class Trie {
 				return;
 			}
 			Node current = root;
-			while (current.key != key) {
+			while (current.key != key) { //durch den searchtree laufen bis schlüssel gefunden wurde
 				if (key < current.key) {
 					if (current.left == null) {
 						current.left = new Node(key, count);
@@ -145,7 +145,7 @@ public class Trie {
 			current = current.get(prefix.charAt(i));
 			result.append(current.value);
 		}
-		while (current.maxChild != null && current.maxChild.value != '*') {
+		while (current.maxChild != null && current.maxChild.value != '*') { //Erster check für den Fall das Root leer ist
 			current = current.maxChild;
 			result.append(current.value);
 		}
@@ -154,19 +154,19 @@ public class Trie {
 
 	public void eval() throws IOException {
 		FileReader fr = new FileReader(
-			//	new File("").getAbsolutePath() + "/src/main/java/blatt_10/aufgabe1/keyphrases.txt");
-							new File("").getAbsolutePath() + "/keyphrases.txt");
+				//	new File("").getAbsolutePath() + "/src/main/java/blatt_10/aufgabe1/keyphrases.txt");
+				new File("").getAbsolutePath() + "/keyphrases.txt");
 		int i;
 		StringBuilder buffer = new StringBuilder();
 		String string = "";
 		while ((i = fr.read()) != -1) {
-			if (i == 59) {
+			if (i == 59) { //ASCII 59 entspricht ';'
 				string = buffer.toString();
 				buffer = new StringBuilder();
 				continue;
 			}
-			if (i == 10) {
-				this.add(string, Integer.parseInt(buffer.toString()));
+			if (i == 10) { //ASCII 10 entspricht zeilenumbruch 
+				this.add(string, Integer.parseInt(buffer.toString())); //dem trie hinzufügen
 				buffer = new StringBuilder();
 				continue;
 			}
@@ -176,7 +176,7 @@ public class Trie {
 	}
 
 	public static void main(String[] args) throws IOException {
-		
+
 		Trie t = new Trie();
 		t.eval();
 		System.out.println("trump : " + t.predict("trump"));
@@ -191,19 +191,6 @@ public class Trie {
 		System.out.println("soc : " + t.predict("soc"));
 		TrieNode tn1 = new TrieNode();
 		TrieNode tn0 = new TrieNode('*');
-		
-		/*tn0.add('b', 10);
-		tn0.add('u', 10);
-		tn0.add('k', 20);
-		tn0.add('o', 10);
-		tn0.add('v', 30);*/
-		Trie t2 = new Trie();
-		t2.add("abc", 1);
-		t2.add("abd", 1);
-		t2.add("aba", 5);
-		t2.add("", 10);
-		t2.add("abaf", 20);
-		String result = t2.predict("abafd");
-		System.out.println(result);	
+
 	}
 }
